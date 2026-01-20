@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Saved Jobs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Poppins;
+            background: #0f3963
+        }
+        
+        .container {
+            width: 80%;
+            margin: 40px auto
+        }
+        
+        .job {
+            background: #f6f5f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px
+        }
+        
+        a {
+            color: #0072ff;
+            text-decoration: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2> My Saved Jobs</h2>
+
+        {% if jobs %} {% for job in jobs %}
+        <div class="job">
+            <h3>{{ job.title }}</h3>
+            <p><b>Company:</b> {{ job.company }}</p>
+            <a href="https://docs.google.com/forms" target="_blank">Apply Now</a>
+        </div>
+        {% endfor %} {% else %}
+        <p>No saved jobs yet.</p>
+        {% endif %}
+
+        <a href="/dashboard">← Back to Dashboard</a>
+    </div>
+</body>
+
+</html>

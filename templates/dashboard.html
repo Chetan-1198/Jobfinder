@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JobFinder Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #020b18;
+            color: #e3e2ec
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px
+        }
+        
+        nav a {
+            color: #38bdf8;
+            margin-left: 15px;
+            text-decoration: none
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px
+        }
+        
+        .job-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 12px
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold
+        }
+        
+        .apply {
+            background: #00c6ff;
+            color: #001018
+        }
+        
+        .save {
+            background: #facc15;
+            color: #001018;
+            margin-left: 8px
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>JobFinder</h2>
+        <nav>
+            <span>Hello, {{ user.fullname.split()[0] }}</span>
+            <a href="/saved-jobs"> Saved Jobs</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main style="padding:30px">
+        {% for category, job_list in jobs.items() %}
+        <h3 style="color:#215268">{{ category }}</h3>
+        <div class="jobs-grid">
+            {% for job in job_list %}
+            <div class="job-card">
+                <h4>{{ job.title }}</h4>
+                <p>{{ job.companies }}</p>
+                <a class="btn apply" href="https://docs.google.com/forms/d/1Ugw1eiRtcFSfTE3IehNoRp6iKgGc0g0ZvC5nN21Zggw/edit" target="_blank">Apply</a>
+                <a class="btn save" href="/save-job?title={{ job.title }}&company={{ job.companies }}"> Save</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </main>
+</body>
+
+</html>
